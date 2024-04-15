@@ -1,3 +1,29 @@
+const usuario = [];
+
+function registrar(){
+    let finalizar;
+    let nombreDeUsuario ;
+    let apellidoDeUsuario;
+    let dni;
+    let datosDeUsuario;
+    do{
+        nombreDeUsuario = prompt("Ingrese su nombre.").toLowerCase();
+        apellidoDeUsuario = prompt("Ingrese su apellido").toLowerCase();
+        do{
+            dni = parseInt(prompt("Ingrese su DNI"));
+        }while(isNaN(dni));
+        finalizar= prompt("Para cargar otro dato, presione una letra + Enter. O presione Enter para salir.");
+        datosDeUsuario = {
+            nombre: nombreDeUsuario,
+            apelliido: apellidoDeUsuario,
+            dni: dni
+        };
+        usuario.push(datosDeUsuario)
+    }while(finalizar !== "");
+}
+registrar();
+console.log(usuario);
+
 function leerTipo() {
     let tipo;
     do {
@@ -31,13 +57,17 @@ function cotizar(tipo, modelo, valor) {
     return cotizacionTR;
 }
 
-alert("Bienvenidos a cotizaciones de Seguros JS");
-let tipoVC = leerTipo();
-let modeloVC = leerModelo();
-let valorVC = Number(prompt("Ingrese el valor del vehículo."));
+function cotizarFinal(){
+    let tipoVC = leerTipo();
+    let modeloVC = leerModelo();
+    let valorVC = Number(prompt("Ingrese el valor del vehículo."));
 
-let cotizacionVC = cotizar(tipoVC, modeloVC, valorVC);
-let cotizacion3R = cotizacionVC - (cotizacionVC * 0.20);
+    let cotizacionVC = cotizar(tipoVC, modeloVC, valorVC);
+    let cotizacion3R = cotizacionVC - (cotizacionVC * 0.20);
 
-alert("Su cotización todo riesgo es de: " + cotizacionVC);
-alert("Su cotización terceros es de: " + cotizacion3R);
+    alert("Su cotización todo riesgo es de: " + cotizacionVC);
+    alert("Su cotización terceros es de: " + cotizacion3R);
+}
+
+const botonCotizacion = document.querySelector("#botonCotizacion")
+botonCotizacion.addEventListener("click", cotizarFinal)
